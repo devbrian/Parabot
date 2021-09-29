@@ -36,7 +36,7 @@ public class HookFile {
     }
 
     public InputStream getInputStream(AccountManager manager) {
-        if (isLocal) {
+        if (true) {
             return this.getInputStream();
         } else {
             try {

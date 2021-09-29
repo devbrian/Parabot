@@ -7,6 +7,7 @@ import org.parabot.core.Core;
 import org.parabot.environment.api.utils.WebUtil;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -131,7 +132,11 @@ public class ServerProviderInfo {
         try {
             return new URL(properties.getProperty("hooks"));
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            try {
+                return new File(properties.getProperty("hooks")).toURI().toURL();
+            } catch (MalformedURLException ee) {
+                ee.printStackTrace();
+            }
         }
         return null;
     }

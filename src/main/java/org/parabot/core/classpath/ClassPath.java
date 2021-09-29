@@ -4,6 +4,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.commons.RemappingClassAdapter;
 import org.objectweb.asm.tree.ClassNode;
+import org.parabot.core.Core;
 import org.parabot.core.Directories;
 import org.parabot.core.asm.ClassRemapper;
 import org.parabot.core.asm.RedirectClassAdapter;
@@ -17,6 +18,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -89,7 +91,12 @@ public class ClassPath {
                     continue;
                 }
                 if (e.getName().endsWith(".class")) {
-                    loadClass(zin);
+                    try{
+                        loadClass(zin);
+                        System.out.println("SUCCESSFULLY LOADED - " + e.getName());
+                    }catch(Exception er){
+                        System.out.println("FAILED TO LOAD - " + e.getName());
+                    }
                 } else {
                     loadResource(e.getName(), zin);
                 }
